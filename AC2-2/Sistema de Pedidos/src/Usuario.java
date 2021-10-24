@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.concurrent.TimeUnit;
 
 public class Usuario {
         //Atributos do cliente
-        String nome;
-        String email;
-        double cpf;
-        double cnpj;
-        int qtd_parcelamento;
-        int prz_fatura;
-    
+        private String nome;
+        private String email;
+        private double cpf;
+        private double cnpj;
+        private int qtd_parcelamento;
+        private int prz_fatura;
+
         //Construtores
         public Usuario() {
             nome = null;
@@ -78,9 +78,15 @@ public class Usuario {
             this.prz_fatura = prz_fatura;
         }
         
+        //Limpa a tela do cmd
+        public static void clearScreen() {  
+            System.out.print("\033[H\033[2J");  
+            System.out.flush();  
+        }  
 
         //Fucao para imprimir os valores do array list
         public void imprimir(String pessoa){
+            
             System.out.println("\nDados informados");
             System.out.println("NOME = " + nome);
             System.out.println("EMAIL = " + email);
@@ -104,7 +110,9 @@ public class Usuario {
             int i = 0;
             String op = null;
             String pessoa = null;
-            String saida = null;
+            
+            //Retomada do menu
+            Menu m = new Menu();
 
             while (true){
                 Usuario u = new Usuario();
@@ -151,11 +159,13 @@ public class Usuario {
                     //Para cada usuario(obj) imprimir o cadastro
                     for(Usuario objUsuario: cadastro){
                         //imprimi os dados do arraylist u
-                        System.out.println("Tamanho da Lista: " + cadastro.size());
+
+                        clearScreen();
                         objUsuario.imprimir(pessoa);
                 }
-                    //Retrona para o Menu
-                    break;
+                //Retrona para o Menu
+                m.menu();
+                break;
             }
                         
         }
